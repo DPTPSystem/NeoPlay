@@ -7,10 +7,7 @@
 * email:		don_peter[kukac]freemail[pont]hu
 * device:		Special adapter and develop device
 * platform:		STM32CubeMX, STM32CubeIDE, C Code
-* MCU:			STM32F407ZET6
-* spec.:		RAM：192K
-*				FLASH：512K
-*				Frequence：168MHz
+* mcu:			STM32F407ZET6 RAM：192K FLASH：512K FREQ：168MHz
 * spec. ICs:	YM2610, YM3016D, RC4558D, LM4880D, JRC2066D or NJM2066D
 
 # Leírás
