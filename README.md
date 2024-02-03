@@ -10,6 +10,8 @@
 * mcu:			STM32F407ZET6 RAM：192K FLASH：512K FREQ：168MHz
 * spec. ICs:	YM2610, YM3016D, RC4558D, LM4880D, JRC2066D or NJM2066D
 
+![DPTP System](https://github.com/DPTPSystem/NeoPlay/blob/master/images/ngvgmplayer.PNG "DPTP System")
+
 # Leírás
 Egy már évek óta dédelgetett álom, amelynek már többedjére fogok neki, de sajnos az időhiány és más projektek priorítása késlelteti a kivitelezést. Az eszköz illetve egy prototíps
 PCB már 2020-ban elkészült, amely arra vár, hogy a fejlesztőpanel segítségével feléledjen. Az eszköz, ha elkészül és nem becsültem alá az erőforásokat, akkor a 90'-es évekből 
