@@ -33,6 +33,7 @@ Reményeim szerint talán még ebben az évben megszólalhat az eszköz.
 # Projekt haladás
 * 2024.02.01. - alap dokumentációk összekészítése (újra)
 * 2024.02.02. - alap program az összes szükséges alap periféria beállítással és 1uS-os timer megszakítással a főciklusban kész. Projekt fórdul.
+* 2024.02.03. - néhány fontos dokumentáció csatolva, CubeMX-ben javítva az egyes ki és bemenetek, dio driver hozzáadva a projekthez, LED-ek kezelése megírva, tesztelésre vár
 
 # Cél
 Neo Geo arcade vagy másként játéktermi játék zenéinek eredeti, de speciális egyedi hardveren történő lejátszása.

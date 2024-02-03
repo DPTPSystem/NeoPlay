@@ -1,25 +1,20 @@
 /* USER CODE BEGIN Header */
-/**
-  ******************************************************************************
-  * @file           : main.c
-  * @brief          : Main program body
-  ******************************************************************************
-  * @attention
-  *
-  * Copyright (c) 2024 STMicroelectronics.
-  * All rights reserved.
-  *
-  * This software is licensed under terms that can be found in the LICENSE file
-  * in the root directory of this software component.
-  * If no LICENSE file comes with this software, it is provided AS-IS.
-  *
-  ******************************************************************************
-  */
+/******************************************************
+ * file name:   main.c
+ * title:       Neo Geo VGM Player
+ * autor:       DPTP System
+ * date:        2024.02.03.
+ * email:       don_peter[kukac]freemail[pont]hu
+ * device:      STM32
+ * platform:    C Code, STM32CubeIDE
+ * MCU:         STM32F407ZET6
+******************************************************/
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "fatfs.h"
 #include "usb_device.h"
+#include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -114,10 +109,16 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+
+  // GPIO driver init
+  gpio_init_pins();
+  led0_out_pst->set(led0_out_pst, 0);
+  led1_out_pst->set(led1_out_pst, 0);
+
   while (1)
   {
 
-	  // 1 us
+	  // 1 uS
 	  if(timer_1us_u16)
 	  {
 		  timer_1us_u16 = 0;
@@ -333,9 +334,8 @@ static void MX_GPIO_Init(void)
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOE, PAD2_Pin|PAD3_Pin|PAD4_Pin|PAD5_Pin
-                          |PAD6_Pin|PAD7_Pin|PA8_Pin|PA9_Pin
-                          |PA10_Pin|PA11_Pin|A0_Pin|A1_Pin
-                          |POE_Pin|PMPX_Pin|PAD0_Pin|PAD1_Pin, GPIO_PIN_RESET);
+                          |PAD6_Pin|PAD7_Pin|A0_Pin|A1_Pin
+                          |PAD0_Pin|PAD1_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(RD_GPIO_Port, RD_Pin, GPIO_PIN_RESET);
@@ -348,10 +348,6 @@ static void MX_GPIO_Init(void)
                           |RAD4_Pin|RAD5_Pin|RAD6_Pin|RAD7_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, RA8_Pin|RA9_Pin|RA20_Pin|RA21_Pin
-                          |RA22_Pin|IC_Pin|CS_Pin|WR_Pin, GPIO_PIN_RESET);
-
-  /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOG, D0_Pin|D1_Pin|D2_Pin|D3_Pin
                           |D4_Pin|D5_Pin|D6_Pin|D7_Pin, GPIO_PIN_RESET);
 
@@ -359,16 +355,14 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(SPI1_CS_GPIO_Port, SPI1_CS_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOD, ROE_Pin|RMPX_Pin|RA23_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, IC_Pin|CS_Pin|WR_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pins : PAD2_Pin PAD3_Pin PAD4_Pin PAD5_Pin
-                           PAD6_Pin PAD7_Pin PA8_Pin PA9_Pin
-                           PA10_Pin PA11_Pin A0_Pin A1_Pin
-                           POE_Pin PMPX_Pin PAD0_Pin PAD1_Pin */
+                           PAD6_Pin PAD7_Pin A0_Pin A1_Pin
+                           PAD0_Pin PAD1_Pin */
   GPIO_InitStruct.Pin = PAD2_Pin|PAD3_Pin|PAD4_Pin|PAD5_Pin
-                          |PAD6_Pin|PAD7_Pin|PA8_Pin|PA9_Pin
-                          |PA10_Pin|PA11_Pin|A0_Pin|A1_Pin
-                          |POE_Pin|PMPX_Pin|PAD0_Pin|PAD1_Pin;
+                          |PAD6_Pin|PAD7_Pin|A0_Pin|A1_Pin
+                          |PAD0_Pin|PAD1_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -398,12 +392,11 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
   /*Configure GPIO pins : RA8_Pin RA9_Pin RA20_Pin RA21_Pin
-                           RA22_Pin IC_Pin CS_Pin WR_Pin */
+                           RA22_Pin */
   GPIO_InitStruct.Pin = RA8_Pin|RA9_Pin|RA20_Pin|RA21_Pin
-                          |RA22_Pin|IC_Pin|CS_Pin|WR_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+                          |RA22_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pins : D0_Pin D1_Pin D2_Pin D3_Pin
@@ -414,6 +407,14 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOG, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PA8_Pin PA9_Pin PA10_Pin PA11_Pin
+                           POE_Pin PMPX_Pin */
+  GPIO_InitStruct.Pin = PA8_Pin|PA9_Pin|PA10_Pin|PA11_Pin
+                          |POE_Pin|PMPX_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
 
   /*Configure GPIO pin : SPI1_CS_Pin */
   GPIO_InitStruct.Pin = SPI1_CS_Pin;
@@ -428,11 +429,17 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GOMB_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : ROE_Pin RMPX_Pin RA23_Pin */
-  GPIO_InitStruct.Pin = ROE_Pin|RMPX_Pin|RA23_Pin;
+  /*Configure GPIO pins : IC_Pin CS_Pin WR_Pin */
+  GPIO_InitStruct.Pin = IC_Pin|CS_Pin|WR_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : ROE_Pin RMPX_Pin RA23_Pin */
+  GPIO_InitStruct.Pin = ROE_Pin|RMPX_Pin|RA23_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
 
 }

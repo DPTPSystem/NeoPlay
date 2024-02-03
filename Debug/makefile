@@ -15,6 +15,7 @@ RM := rm -rf
 -include Middlewares/Third_Party/FatFs/src/subdir.mk
 -include Middlewares/ST/STM32_USB_Device_Library/Core/Src/subdir.mk
 -include Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Src/subdir.mk
+-include Drivers/dio/src/subdir.mk
 -include Drivers/STM32F4xx_HAL_Driver/Src/subdir.mk
 -include objects.mk
 
@@ -56,6 +57,9 @@ default.size.stdout \
 OBJDUMP_LIST += \
 neoplay.list \
 
+OBJCOPY_HEX += \
+neoplay.hex \
+
 
 # All Target
 all: main-build
@@ -64,8 +68,8 @@ all: main-build
 main-build: neoplay.elf secondary-outputs
 
 # Tool invocations
-neoplay.elf neoplay.map: $(OBJS) $(USER_OBJS) C:\Munka\Sajat\NeoPlay\STM32F407ZETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "neoplay.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Munka\Sajat\NeoPlay\STM32F407ZETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="neoplay.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+neoplay.elf neoplay.map: $(OBJS) $(USER_OBJS) C:\Users\DPTP\Google\ Drive\github\NeoPlay\STM32F407ZETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "neoplay.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\DPTP\Google Drive\github\NeoPlay\STM32F407ZETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="neoplay.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -79,12 +83,17 @@ neoplay.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	@echo 'Finished building: $@'
 	@echo ' '
 
+neoplay.hex: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objcopy  -O ihex $(EXECUTABLES) "neoplay.hex"
+	@echo 'Finished building: $@'
+	@echo ' '
+
 # Other Targets
 clean:
-	-$(RM) default.size.stdout neoplay.elf neoplay.list neoplay.map
+	-$(RM) default.size.stdout neoplay.elf neoplay.hex neoplay.list neoplay.map
 	-@echo ' '
 
-secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST)
+secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST) $(OBJCOPY_HEX)
 
 fail-specified-linker-script-missing:
 	@echo 'Error: Cannot find the specified linker script. Check the linker settings in the build configuration.'
