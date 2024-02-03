@@ -10,13 +10,20 @@
 * mcu:			STM32F407ZET6 RAM：192K FLASH：512K FREQ：168MHz
 * spec. ICs:	YM2610, YM3016D, RC4558D, LM4880D, JRC2066D or NJM2066D
 
-![DPTP System](https://github.com/DPTPSystem/NeoPlay/blob/master/images/ngvgmplayer.PNG "DPTP System")
+![DPTP System](https://github.com/DPTPSystem/NeoPlay/blob/main/images/ngvgmplayer.PNG "DPTP System")
 
 # Leírás
 Egy már évek óta dédelgetett álom, amelynek már többedjére fogok neki, de sajnos az időhiány és más projektek priorítása késlelteti a kivitelezést. Az eszköz illetve egy prototíps
 PCB már 2020-ban elkészült, amely arra vár, hogy a fejlesztőpanel segítségével feléledjen. Az eszköz, ha elkészül és nem becsültem alá az erőforásokat, akkor a 90'-es évekből 
 amolyan retro játékzenéket lejátszó eszköz lesz, amelyhez hasonlót már korábban bemutattam, annyi külömbséggel, hogy a mostani hardver a Neo Geo eredeti hangproceszorát foglya megszólaltatni.
 Nem kis feladat lesz a megfelelő fejlesztés, de remélem a korábbi tapasztalatok, amelyeket a hasonló SEGA-s projekteknél hazsnáltam segítenek, hogy sikerrel járjak.
+Tehát hasngsúlyozom, hogy a kapcsolás és áramköri tervek egy olyan prototípus adapterének tervei, amely még erősen hibás lehet illetve nem tartalmazza az MCU-t és egyébb speciális 
+perifériákat. A fejlesztő panel egy STM32F407ZET6 Development Board https://github.com/DPTPSystem/NeoPlay/blob/main/images/stm32f407zet6_development_board.JPG .  Az adapter úgy van 
+tervezve, hogy a fejlesztő alaplapra felülről rá kell nyomni. 
+
+# Prototipus
+A prototípus tartalmaz hibákat, amely egyből szembe tűnik és felfedezett hiba és még nincs javítva az az, hogy az adapter és a fejlesztő lap szélső csatlakozósor 1 raszterrel keskenyebb 
+lett, így azt majd a következő tervmódosításnál korrigálni szükséges.
 
 # Folyamat
 A projekt lassan halladva fog felépülni, elsőnek csak egy alap programot készítek el, amely hibamentesen fordúl és készen álnak a szükséges perifériák felkonfigurálva.
