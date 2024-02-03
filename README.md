@@ -18,7 +18,7 @@ PCB már 2020-ban elkészült, amely arra vár, hogy a fejlesztőpanel segítsé
 amolyan retro játékzenéket lejátszó eszköz lesz, amelyhez hasonlót már korábban bemutattam, annyi külömbséggel, hogy a mostani hardver a Neo Geo eredeti hangproceszorát foglya megszólaltatni.
 Nem kis feladat lesz a megfelelő fejlesztés, de remélem a korábbi tapasztalatok, amelyeket a hasonló SEGA-s projekteknél hazsnáltam segítenek, hogy sikerrel járjak.
 Tehát hasngsúlyozom, hogy a kapcsolás és áramköri tervek egy olyan prototípus adapterének tervei, amely még erősen hibás lehet illetve nem tartalmazza az MCU-t és egyébb speciális 
-perifériákat. A fejlesztő panel egy STM32F407ZET6 Development Board https://github.com/DPTPSystem/NeoPlay/blob/main/images/stm32f407zet6_development_board.JPG .  Az adapter úgy van 
+perifériákat. A fejlesztő panel egy [STM32F407ZET6 Development Board](https://github.com/DPTPSystem/NeoPlay/blob/main/images/stm32f407zet6_development_board.JPG).  Az adapter úgy van 
 tervezve, hogy a fejlesztő alaplapra felülről rá kell nyomni. 
 
 # Prototipus
